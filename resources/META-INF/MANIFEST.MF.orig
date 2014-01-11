@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+MIDlet-Name: RobotBuilderTest
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: Robot, , org.usfirst.frc2877.DriveProto1.Robot
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1
+=======
+MIDlet-Name: RobotBuilderTest
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: FIRST
+MIDlet-1: Robot, , org.usfirst.frc0000.Robot
+MicroEdition-Profile: IMP-1.0
+MicroEdition-Configuration: CLDC-1.1
+>>>>>>> 30b974a519e543cebf60d0cf99a05ce743fc9b71
