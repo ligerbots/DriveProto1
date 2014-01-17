@@ -37,6 +37,8 @@ public class Robot extends IterativeRobot {
     private Drive drive;
     //private EncoderTesting encoderTesting;
     public static EncoderMotor encoderMotor;
+    public static GyroSubsystem gyroSubsystem;
+    public static PneumaticPusher pneumaticPusher;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -55,6 +57,8 @@ public class Robot extends IterativeRobot {
         // news. Don't move it.
         encoderMotor = new EncoderMotor();
         drive = new Drive();
+        gyroSubsystem = new GyroSubsystem();
+        pneumaticPusher = new PneumaticPusher();
         oi = new OI();
 	
         // instantiate the command used for the autonomous period

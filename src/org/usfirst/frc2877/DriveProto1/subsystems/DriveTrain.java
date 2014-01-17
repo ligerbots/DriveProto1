@@ -45,6 +45,8 @@ public class DriveTrain extends Subsystem {
             //this is reversed because of the default variable names, which are moveValue and rotateValue, IN THAT ORDER.
             //since the Y controls going forward, we put Y first. If when you press up the robot turns, undo this.
             robotDrive.arcadeDrive(vC*x, vC*y);
+            //Despite what the function looks like it says, you do actually want
+            //arcadeDrive.(x,y), not (y,x). AAAARRRRRGH.
         }
     }
     
