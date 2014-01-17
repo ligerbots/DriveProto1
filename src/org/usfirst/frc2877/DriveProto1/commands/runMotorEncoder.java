@@ -17,7 +17,7 @@ public class runMotorEncoder extends Command {
     public runMotorEncoder() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.encoderMotor);
+    requires(Robot.encoderMotor);
     }
 
     // Called just before this Command runs the first time
@@ -37,6 +37,7 @@ public class runMotorEncoder extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        Robot.encoderMotor.runMotor(0);
     }
 
     // Called when another command which requires one or more of the same
