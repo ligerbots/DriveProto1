@@ -94,10 +94,12 @@ public class RobotMap {
         gyroSubsystemGyro1 = new Gyro(1, 1);
         LiveWindow.addSensor("GyroSubsystem", "Gyro1", gyroSubsystemGyro1);
         gyroSubsystemGyro1.setSensitivity(0.007);
-        pneumaticPusherPushSolenoid = new DoubleSolenoid(1, 2);
-        pneumaticPusherPushCompressor = new Compressor(1, 1, 2, 3);
+        pneumaticPusherPushSolenoid = new DoubleSolenoid(1, 1, 2);
+        //The first Digital Module is in cRIO slot 2, but it's referred to as slot 1 in the code
+        pneumaticPusherPushCompressor = new Compressor(1, 1, 1, 3);
         pneumaticPusherPushCompressor.start();
-        servo1 = new Servo(2, 1);        
+        //The first Digital Module is in cRIO slot 2, but it's referred to as slot 1 in the code
+        servo1 = new Servo(1, 1);        
         
 
     }

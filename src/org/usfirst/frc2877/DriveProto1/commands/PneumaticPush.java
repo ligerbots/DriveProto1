@@ -15,7 +15,7 @@ import org.usfirst.frc2877.DriveProto1.Robot;
 public class PneumaticPush extends Command {
     
 private int iteration = 0;
-private int maxPushout = 20;
+private int maxPushout = 50;
     public PneumaticPush() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
