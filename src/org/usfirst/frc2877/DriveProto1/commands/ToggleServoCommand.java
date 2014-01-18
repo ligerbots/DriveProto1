@@ -12,12 +12,14 @@ import org.usfirst.frc2877.DriveProto1.Robot;
  *
  * @author Administrator
  */
-public class GyroReadCommand extends Command {
+public class ToggleServoCommand extends Command {
+
     
-    public GyroReadCommand() {
+    public ToggleServoCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.gyroSubsystem);
+        requires(Robot.servoSubsystem);
+        
     }
 
     // Called just before this Command runs the first time
@@ -26,14 +28,12 @@ public class GyroReadCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    double angle = Robot.gyroSubsystem.getCurrentAngle();
-        System.out.print("Angle: ");
-        System.out.println(angle);
+        Robot.servoSubsystem.switchServo();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
@@ -43,7 +43,6 @@ public class GyroReadCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        //WHO DARES INTERRUPT THE MIGHTY GYRO READ COMMAND?!
         end();
     }
 }
