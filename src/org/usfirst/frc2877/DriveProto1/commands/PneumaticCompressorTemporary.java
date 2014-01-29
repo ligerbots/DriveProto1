@@ -5,52 +5,60 @@
  */
 package org.usfirst.frc2877.DriveProto1.commands;
 
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2877.DriveProto1.Robot;
+import org.usfirst.frc2877.DriveProto1.RobotMap;
 
 /**
  *
  * @author Administrator
  */
-public class PneumaticPush extends Command {
-
-    private int iteration = 0;
-    private int maxPushout = 50;
-
-    public PneumaticPush() {
+public class PneumaticCompressorTemporary extends Command {
+    
+    int time;
+    private int timeOn = 0;
+    
+    public PneumaticCompressorTemporary(int t) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.pneumaticPusher);
+        time = t;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        iteration = 0;
+        timeOn = 0;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        iteration += 1;
-
-        if (iteration < maxPushout) {
-            Robot.pneumaticPusher.pushSet(true);
+        timeOn += 1;
+        
+        if (timeOn < 25*time) {
+            RobotMap.pneumaticPusherPushCompressor.start();
         } else {
-            Robot.pneumaticPusher.pushSet(false);
+            RobotMap.pneumaticPusherPushCompressor.stop();
         }
+        /*
+        System.out.print(timeOn);
+        System.out.print("/");
+        System.out.println(time*25);
+        */
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        boolean finished = false;
-        if (iteration > 2 * maxPushout) {
-            finished = true;
+        boolean isDone = false;
+        if (timeOn > 25*time) {
+            isDone = true;
         }
-        return finished;
-    }
+        return isDone;
+        }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.pneumaticPusher.pushOff();
+        RobotMap.pneumaticPusherPushCompressor.stop();
     }
 
     // Called when another command which requires one or more of the same

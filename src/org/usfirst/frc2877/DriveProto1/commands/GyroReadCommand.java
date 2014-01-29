@@ -7,6 +7,7 @@ package org.usfirst.frc2877.DriveProto1.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2877.DriveProto1.Robot;
+import org.usfirst.frc2877.DriveProto1.RobotMap;
 
 /**
  *
@@ -22,6 +23,7 @@ public class GyroReadCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        RobotMap.gyroSubsystemGyro1.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run

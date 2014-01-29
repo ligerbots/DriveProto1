@@ -20,20 +20,27 @@ public class ServoSubsystem extends Subsystem {
 
     Servo servo = RobotMap.servo1;
     boolean yup = true;
+    double servoAngle = 0;
     public ServoSubsystem() {
     }
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ToggleServoCommand());
+        //setDefaultCommand(new ToggleServoCommand());
     }
     
     public void switchServo() {
         if (yup) {
             servo.setAngle(90);
+            System.out.println("servo angle set to 90");
         } else { //nope
             servo.setAngle(0);
+            System.out.println("servo angle set to 0");
         }
+            servoAngle = servo.getAngle();
+            System.out.print("servo says angle is");
+            System.out.println(servoAngle);
+
         yup = !yup;
     }
     

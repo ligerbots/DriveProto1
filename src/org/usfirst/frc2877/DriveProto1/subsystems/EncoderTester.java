@@ -37,6 +37,6 @@ public class EncoderTester extends Subsystem {
     }
 
     public void quadratureEncoder() {
-    //    SmartDashboard.putNumber("Distance:", quadratureEncoder1.getDistance());
+        //SmartDashboard.putNumber("Distance:", quadratureEncoder1.getDistance());
     }
 }
