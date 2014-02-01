@@ -11,6 +11,7 @@ package org.usfirst.frc2877.DriveProto1.commands;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc2877.DriveProto1.DummyPIDOutput;
 import org.usfirst.frc2877.DriveProto1.Robot;
 import org.usfirst.frc2877.DriveProto1.RobotMap;
@@ -20,7 +21,7 @@ import org.usfirst.frc2877.DriveProto1.RobotMap;
  */
 public class UtilizeThePid extends Command {
 
-    //DummyPIDOutput theOutput = RobotMap.PIDOut;
+    DummyPIDOutput theOutput = RobotMap.PIDOut;
     PIDController PIDControl = RobotMap.pIDController1;
     double prevHeading;
 
@@ -34,8 +35,8 @@ public class UtilizeThePid extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //prevHeading = PIDControl.getSetpoint();
-        //PIDControl.setSetpoint(prevHeading+90);
+        prevHeading = PIDControl.getSetpoint();
+        PIDControl.setSetpoint(prevHeading+90);
         RobotMap.gyroSubsystemGyro1.reset();
         //System.out.println("PID: Prev heading set to " + prevHeading);
     }
@@ -44,28 +45,40 @@ public class UtilizeThePid extends Command {
     protected void execute() {
         double gyroAngle = Robot.gyroSubsystem.getCurrentAngle();
         double gyroDrivePass = (90.0 - gyroAngle) / 90.0;
+          double minConstant = 0.4;
         if (Math.abs(gyroDrivePass) > 1.0) {
             if (gyroDrivePass > 1.0) {
                 gyroDrivePass = 1.0;
             } else if (gyroDrivePass < -1.0) {
                 gyroDrivePass = -1.0;
             }
-        }
+          }
+       if (Math.abs(gyroDrivePass) < minConstant) {
+           if (gyroAngle < 90) {
+               gyroDrivePass = minConstant;
+           } else if (gyroAngle >90) {
+               gyroDrivePass = -minConstant;
+           }
+         }
+       Robot.driveTrain.drive(gyroDrivePass, 0);
         
-        System.out.println("GyroDrivePass = " + gyroDrivePass);
-        //double output = theOutput.output;
-        //Robot.driveTrain.drive(gyroDrivePass, 0);
-        //System.out.println("PID output: "+output);
-        //System.out.print("Setpoint: " + PIDControl.getSetpoint());
-        //System.out.println(", Error: " + PIDControl.getError());
+//        System.out.println("GyroDrivePass = " + gyroDrivePass);
+//        double output = theOutput.output;
+//        Robot.driveTrain.drive(output, 0);
+//        System.out.println("PID output: "+output);
+//        SmartDashboard.putNumber("PID output: ", output);
+//        System.out.print("Setpoint: " + PIDControl.getSetpoint());
+//        SmartDashboard.putNumber("Setpoint: ", PIDControl.getSetpoint());
+//        System.out.println(", Error: " + PIDControl.getError());
+//        SmartDashboard.putNumber("Error: ", PIDControl.getError());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        //return PIDControl.onTarget();
+//        return PIDControl.onTarget();
         double gyroAngle = Robot.gyroSubsystem.getCurrentAngle();
         boolean isFinished = (gyroAngle > 89.0 && gyroAngle < 91.0);
-        if (isFinished) {
+       if (isFinished) {
             System.out.println("UtilizeThePid Finished");
         }
         return isFinished;
@@ -74,7 +87,7 @@ public class UtilizeThePid extends Command {
     // Called once after isFinished returns true
     protected void end() {
         Robot.driveTrain.drive(0, 0);
-        //PIDControl.setSetpoint(prevHeading);
+        PIDControl.setSetpoint(prevHeading);
     }
 
     // Called when another command which requires one or more of the same
