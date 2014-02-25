@@ -33,7 +33,11 @@ public class PneumaticPush extends Command {
         iteration += 1;
 
         if (iteration < maxPushout) {
-            Robot.pneumaticPusher.pushSet(true);
+            if ((iteration / 5) % 2 == 0) {
+                Robot.pneumaticPusher.pushSet(true);
+            } else {
+                Robot.pneumaticPusher.pushOff();
+            }
         } else {
             Robot.pneumaticPusher.pushSet(false);
         }

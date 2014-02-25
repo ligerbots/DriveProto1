@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
         // yet. Thus, their requires() statements may grab null pointers. Bad
         // news. Don't move it.
         encoderMotor = new EncoderMotor();
-        drive = new Drive();
+       // drive = new Drive();
         spikeSubsystem = new SpikeSubsystem();
         spikeCommand = new SpikeCommand();
 
@@ -97,7 +97,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         System.out.println("teleopInit");
         if (autonomousCommand != null) autonomousCommand.cancel();
-        drive.start();
+        //drive.start();
         gyroReadCommand.start();
 //        spikeCommand.start();
         pneumaticPusher.pushOff();
